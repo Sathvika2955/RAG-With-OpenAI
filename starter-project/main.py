@@ -17,4 +17,20 @@ if not os.getenv("OPENAI_API_KEY"):
 # Initialize OpenAI client
 client = OpenAI()
 
-print(Fore.GREEN + "Requesting a response from the model..." + Fore.RESET)
+print(Fore.GREEN + "Requesting a response from the model..." + Fore.RESET + "\n")
+
+completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": "Write a short poem about the beauty of nature." 
+        }
+    ]
+)
+
+print(Fore.BLUE + completion.choices[0].message.content )
